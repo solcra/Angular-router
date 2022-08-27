@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
 
 import {
@@ -9,20 +9,28 @@ import {
 
 import { StoreService } from '../../services/store.service';
 import { ProductsService } from '../../services/products.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   myShoppingCart: Product[] = [];
   total = 0;
-  products: Product[] = [];
+  @Input() products: Product[] = [];
+  // @Input () productId: string | null = null;
+  @Input() set productId(id:string | null){
+    if(id){
+      this.onShowDetail(id)
+    }
+  };
+  @Output() loadMore = new EventEmitter();
   showProductDetail = false;
   productChosen: Product | null = null;
-  limit = 10;
-  offset = 0;
+  // limit = 10;
+  // offset = 0;
   statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
 
   constructor(
@@ -32,12 +40,13 @@ export class ProductsComponent implements OnInit {
     this.myShoppingCart = this.storeService.getShoppingCart();
   }
 
-  ngOnInit(): void {
-    this.productsService.getAll(10, 0).subscribe((data) => {
-      this.products = data;
-      this.offset += this.limit;
-    });
-  }
+
+  // ngOnInit(): void {
+  //   this.productsService.getAll(10, 0).subscribe((data) => {
+  //     this.products = data;
+  //     this.offset += this.limit;
+  //   });
+  // }
 
   onAddToShoppingCart(product: Product) {
     this.storeService.addProduct(product);
@@ -50,7 +59,10 @@ export class ProductsComponent implements OnInit {
 
   onShowDetail(id: string) {
     this.statusDetail = 'loading';
-    this.toggleProductDetail();
+    // this.toggleProductDetail();
+    if(!this.showProductDetail){
+      this.showProductDetail = true;
+    }
     this.productsService.getOne(id).subscribe(
       (data) => {
         this.productChosen = data;
@@ -105,10 +117,14 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  loadMore() {
-    this.productsService.getAll(this.limit, this.offset).subscribe((data) => {
-      this.products = this.products.concat(data);
-      this.offset += this.limit;
-    });
+  onLoadMore() {
+    this.loadMore.emit();
   }
+
+  // loadMore() {
+  //   this.productsService.getAll(this.limit, this.offset).subscribe((data) => {
+  //     this.products = this.products.concat(data);
+  //     this.offset += this.limit;
+  //   });
+  // }
 }
