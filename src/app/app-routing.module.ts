@@ -1,20 +1,24 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from './website/components/layout/layout.component';
-import { CategoryComponent } from './website/pages/category/category.component';
-import { HomeComponent } from './website/pages/home/home.component';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { ProductDetailComponent } from './website/pages/product-detail/product-detail.component';
+import { CustomPreloadService } from './services/custom-preload.service';
+import { QuicklinkStrategy } from 'ngx-quicklink';
+import { AdminGuard } from './guards/admin.guard';
+
 
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./website/website.module').then(m => m.WebsiteModule)
+    loadChildren: () => import('./website/website.module').then(m => m.WebsiteModule),
+    data:{
+      preload: true,
+    }
   },
   {
     path: 'cms',
-    loadChildren: () => import('./cms/cms.module').then(m => m.CmsModule)
+    canActivate: [AdminGuard],
+    loadChildren: () => import('./cms/cms.module').then(m => m.CmsModule),
   },
   {
     path: '**',
@@ -23,7 +27,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    // preloadingStrategy: PreloadAllModules //Este es para el tema de que me carge todas los modulos del sitio
+    // preloadingStrategy: CustomPreloadService // estrategia realizada personal
+    preloadingStrategy: QuicklinkStrategy // estrategia que si se muestra en pantalla raliza preload del resto de vistas
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
