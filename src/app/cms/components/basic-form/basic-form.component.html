@@ -1,0 +1,114 @@
+<p>{{nameFiled.value}} - {{ nameFiled.valid }}</p>
+<p><input [class.is-valid]="isNameFiledValid" [class.is-invalid]="isNameFiledInValid" type="text" [formControl]="nameFiled"></p>
+
+<!-- <code><pre>{{nameFiled | json}}</pre></code> -->
+<p>{{emailFiled.value}} - {{ emailFiled.valid }}</p>
+<p><input [class.is-valid]="emailFiled.valid && emailFiled.touched" [class.is-invalid]="emailFiled.touched && emailFiled.invalid" type="email" [formControl]="emailFiled"></p>
+<button [disabled]="!nameFiled.valid || !emailFiled.valid" (click)="getNameValue()">Get value</button>
+<div class="messages" [class.active]="isNameFiledInValid">
+  <p *ngIf="emailFiled.touched && emailFiled.hasError('required')"><strong>Campo es nesesario</strong></p>
+  <p *ngIf="emailFiled.touched && emailFiled.hasError('maxlength')"><strong>Deve terner maximo 10 carateres</strong></p>
+</div>
+<p>{{telFiled.value}}</p>
+<p><input type="tel" [formControl]="telFiled"></p>
+<p>{{colorFiled.value}}</p>
+<p><input type="color" [formControl]="colorFiled"></p>
+<p>{{dateFiled.value}}</p>
+<p><input type="date" [formControl]="dateFiled"></p>
+<p>{{numberFiled.value}}</p>
+<p><input type="number" [formControl]="numberFiled"></p>
+<p>{{categoryField.value}}</p>
+<p>
+  <select [formControl]="categoryField">
+    <option value="category-1">Catefory 1</option>
+    <option value="category-2">Catefory 2</option>
+    <option value="category-3">Catefory 3</option>
+    <option value="category-4">Catefory 4</option>
+  </select>
+</p>
+<p>{{tagFilen.value}}</p>
+<p>
+  <select [formControl]="tagFilen" multiple>
+    <option value="tag-1">Tag 1</option>
+    <option value="tag-2">Tag 2</option>
+    <option value="tag-3">Tag 3</option>
+    <option value="tag-4">Tag 4</option>
+  </select>
+</p>
+<p>
+  Agree: {{ agreeFilen.value }}
+  <input type="checkbox" [formControl]="agreeFilen">
+</p>
+<p>
+  Gender: {{ genderFilen.value }}
+  <label>
+    <input name="gender" type="radio" value="male" [formControl]="genderFilen">
+    Male
+  </label>
+  <label>
+    <input name="gender" type="radio" value="female" [formControl]="genderFilen">
+    Female
+  </label>
+</p>
+
+<p>
+  Zone: {{ zoneFilen.value }}
+  <label>
+    <input name="zone" type="radio" value="zone-1" [formControl]="zoneFilen">
+    Zone 1
+  </label>
+  <label>
+    <input name="zone" type="radio" value="zone-2" [formControl]="zoneFilen">
+    Zone 2
+  </label>
+</p>
+<form [formGroup]="form" (ngSubmit)="save()">
+  <p><input [class.is-valid]="isNameFiledValidControl" [class.is-invalid]="isNameFiledInValidControl" type="text" formControlName="name"></p>
+  <p><input type="text" formControlName="email"></p>
+  <p><input type="tel" formControlName="tel"></p>
+  <p><button type="submit">Enviar</button></p>
+</form>
+
+<form [formGroup]="formTwo" (ngSubmit)="saveTwo()">
+  <div formGroupName="fullName">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput type="text" formControlName="name">
+      <mat-icon matSuffix *ngIf="isNameFiledValidControlTwo">done</mat-icon>
+      <mat-icon matSuffix *ngIf="isNameFiledInValidControlTwo">close</mat-icon>
+    </mat-form-field>
+    <div class="messages" [class.active]="isNameFiledInValidControlTwo">
+      <mat-error *ngIf="nameFiledValidCOntroelTwo?.hasError('required')">
+        Campo es nesesario
+      </mat-error>
+      <mat-error *ngIf="nameFiledValidCOntroelTwo?.hasError('maxlength')">
+        Deve terner maximo 10 carateres
+      </mat-error>
+      <mat-error *ngIf="nameFiledValidCOntroelTwo?.hasError('pattern')">
+        No deve tener carateres
+      </mat-error>
+    </div>
+
+    <!-- <p>Nombre:<input [class.is-valid]="isNameFiledValidControlTwo" [class.is-invalid]="isNameFiledInValidControlTwo" type="text" formControlName="name"></p>
+    <div class="messages" [class.active]="isNameFiledInValidControlTwo">
+      <p *ngIf="nameFiledValidCOntroelTwo?.hasError('required')"><strong>Campo es nesesario</strong></p>
+      <p *ngIf="nameFiledValidCOntroelTwo?.hasError('maxlength')"><strong>Deve terner maximo 10 carateres</strong></p>
+      <p *ngIf="nameFiledValidCOntroelTwo?.hasError('pattern')"><strong>No deve tener carateres</strong></p>
+    </div> -->
+    <p>Apellido:<input [class.is-valid]="isLastNameFiledValidControlTwo" [class.is-invalid]="isLastNameFiledInValidControlTwo" type="text" formControlName="lastName"></p>
+    <div class="messages" [class.active]="isLastNameFiledInValidControlTwo">
+      <p *ngIf="lastNameFiledValidCOntroelTwo?.hasError('required')"><strong>Campo es nesesario</strong></p>
+      <p *ngIf="lastNameFiledValidCOntroelTwo?.hasError('maxlength')"><strong>Deve terner maximo 10 carateres</strong></p>
+      <p *ngIf="lastNameFiledValidCOntroelTwo?.hasError('pattern')"><strong>No deve tener carateres</strong></p>
+    </div>
+  </div>
+  <p>Email: <input type="emai" formControlName="email" [class.is-valid]="isEmailFiledValidControlTwo" [class.is-invalid]="isEmailFiledInValidControlTwo"></p>
+  <div class="messages" [class.active]="isNameFiledInValidControlTwo">
+    <p *ngIf="emailFiledValidCOntroelTwo?.hasError('required')"><strong>Campo es nesesario</strong></p>
+    <p *ngIf="emailFiledValidCOntroelTwo?.hasError('email')"><strong>Deve ser un correo</strong></p>
+  </div>
+  <p>Telefono: <input type="tel" formControlName="tel" [class.is-valid]="isTelFiledValidControlTwo"></p>
+  <p>Edad: <input type="number" formControlName="date" [class.is-valid]="isDateFiledValidControlTwo"></p>
+  <p>Agree: <input type="checkbox" formControlName="agree" [class.is-valid]="isAgreeFiledValidControlTwo"></p>
+  <p><button [disabled]="formTwo.invalid" type="submit">Enviar</button></p>
+</form>

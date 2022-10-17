@@ -13,6 +13,8 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { SwiperModule } from 'swiper/angular';
 import { SharedModule } from '../shared/shared.module';
 import { QuicklinkModule } from 'ngx-quicklink';
+import { MaterialModule } from '../material/material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { QuicklinkModule } from 'ngx-quicklink';
     WebsiteRoutingModule,
     SwiperModule,
     SharedModule,
-    QuicklinkModule
+    QuicklinkModule,
+    ReactiveFormsModule,
+    MaterialModule
   ]
 })
 export class WebsiteModule { }

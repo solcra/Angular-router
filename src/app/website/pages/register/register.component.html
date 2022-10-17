@@ -1,1 +1,51 @@
-<p>register works!</p>
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput type="text" formControlName="email">
+      <!-- <mat-icon matSuffix *ngIf="isNameFiledValidControlTwo">done</mat-icon>
+      <mat-icon matSuffix *ngIf="isNameFiledInValidControlTwo">close</mat-icon> -->
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password">
+      <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+        <mat-error *ngIf="form.get('password')?.hasError('invalid_password')">
+          Deves tener al menos un numero
+        </mat-error>
+      </div>
+      <!-- <mat-icon matSuffix *ngIf="isNameFiledValidControlTwo">done</mat-icon>
+      <mat-icon matSuffix *ngIf="isNameFiledInValidControlTwo">close</mat-icon> -->
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Confirmar password</mat-label>
+      <input matInput type="password" formControlName="confirmPassword">
+      <div *ngIf="form.get('confirmPassword')?.touched && form.errors">
+        <mat-error *ngIf="form?.hasError('match_password')">
+          Los password no considen
+        </mat-error>
+      </div>
+      <!-- <mat-icon matSuffix *ngIf="isNameFiledValidControlTwo">done</mat-icon>
+      <mat-icon matSuffix *ngIf="isNameFiledInValidControlTwo">close</mat-icon> -->
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-radio-group formControlName="type" aria-label="Select an option">
+      <mat-radio-button value="company">Company</mat-radio-button>
+      <mat-radio-button value="customer">Customer</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Company name</mat-label>
+      <input matInput type="text" formControlName="companyName">
+      <!-- <mat-icon matSuffix *ngIf="isNameFiledValidControlTwo">done</mat-icon>
+      <mat-icon matSuffix *ngIf="isNameFiledInValidControlTwo">close</mat-icon> -->
+    </mat-form-field>
+  </div>
+  <p><button [disabled]="form.invalid" type="submit">Enviar</button></p>
+</form>

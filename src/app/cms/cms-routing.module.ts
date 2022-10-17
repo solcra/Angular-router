@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BasicFormComponent } from './components/basic-form/basic-form.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { GridComponent } from './pages/grid/grid.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
@@ -21,6 +22,14 @@ const routes: Routes = [
       {
         path: 'tasks',
         component: TasksComponent
+      },
+      {
+        path: 'basic',
+        component: BasicFormComponent
+      },
+      {
+        path: 'categories',
+        loadChildren: () => import('./pages/categories/categories.module').then(m => m.CategoriesModule),
       }
     ]
   }
