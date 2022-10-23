@@ -8,6 +8,9 @@ import { ProductsComponent } from './components/products/products.component';
 import { RouterModule } from '@angular/router';
 import { ImgComponent } from './components/img/img.component';
 import { SwiperModule } from 'swiper/angular';
+import { StepperComponent } from './components/stepper/stepper.component';
+import { SearchComponent } from './components/search/search.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,11 +22,14 @@ import { SwiperModule } from 'swiper/angular';
     ProductComponent,
     ProductsComponent,
     ImgComponent,
+    StepperComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
-    SwiperModule
+    SwiperModule,
+    ReactiveFormsModule
   ],
   exports: [
     ReversePipe,
@@ -32,6 +38,8 @@ import { SwiperModule } from 'swiper/angular';
     ProductComponent,
     ProductsComponent,
     ImgComponent,
+    StepperComponent,
+    SearchComponent
   ]
 })
 export class SharedModule { }

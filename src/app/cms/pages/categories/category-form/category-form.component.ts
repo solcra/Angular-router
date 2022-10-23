@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validator, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validator, FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { MyValidators } from 'src/app/utils/validators';
@@ -31,10 +31,27 @@ export class CategoryFormComponent implements OnInit {
     }
   }
 
+  addAdressField() {
+    this.addressField.push(this.createAddressField())
+  }
+
+  private createAddressField() {
+    return this.formBuilder.group({
+      zip: ['', Validators.required],
+      text: ['', Validators.required]
+    });
+  }
+
   private buildForm() {
     this.form = this.formBuilder.group({
       name: ['',[Validators.required, Validators.minLength(4)], MyValidators.valiidateCategory(this.categoriesService)],
-      image: ['',[Validators.required]]
+      image: ['',[Validators.required]],
+      address: this.formBuilder.array([]),
+      stock:[4,[Validators.required]]
+    });
+    this.form.get('stock')?.valueChanges
+    .subscribe(value => {
+      console.log(value);
     })
   }
 
@@ -46,6 +63,10 @@ export class CategoryFormComponent implements OnInit {
     return this.form.get('image');
   }
 
+  get addressField(){
+    return this.form.get('address') as FormArray;
+  }
+
   save(){
     if(this.form.valid){
       this.createCategory();
@@ -53,6 +74,7 @@ export class CategoryFormComponent implements OnInit {
       this.form.markAllAsTouched();
     }
     console.log(this.form);
+    console.log(this.form.value);
   }
 
   private createCategory(){

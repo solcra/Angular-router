@@ -27,7 +27,32 @@
     </mat-form-field>
   </div>
   <div>
+    <p><button type="button" (click)="addAdressField()">Add address</button></p>
+    <div formArrayName="address" *ngFor="let address of addressField.controls; let i=index">
+      <div [formGroupName]="i">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Zip</mat-label>
+          <input matInput type="text" formControlName="zip" placeholder="Nombre">
+          <div class="messages" *mgIf="nameField.touched && nameField.invalid">
+            <mat-error *ngIf="nameField?.hasError('required')">Este campo es requerido</mat-error>
+          </div>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Text</mat-label>
+          <input matInput type="text" formControlName="text" placeholder="Text">
+          <div class="messages" *mgIf="nameField.touched && nameField.invalid">
+            <mat-error *ngIf="nameField?.hasError('required')">Este campo es requerido</mat-error>
+          </div>
+        </mat-form-field>
+      </div>
+    </div>
+    <div>
+      <app-stepper formControlName="stock"></app-stepper>
+    </div>
+  </div>
+  <div>
     <input (change)="archiov($event)" type="file" name="" id="">
   </div>
   <p><button [disabled]="form.invalid" type="submit">Enviar</button></p>
 </form>
+

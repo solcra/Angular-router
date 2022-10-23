@@ -1,0 +1,73 @@
+1
+12
+123
+1234
+12345
+12345678910
+12345678910a
+13453243
+url: https://www.instagram.com/p/BXB4zsUlW5Z/?taken-by=beco.mx
+url: http://instagram.com/p/blablablah
+url: http://itam.mx/test
+http://instagram.com/p/blablablah
+csv1,csv2,csv3,csv4,csv5
+Rodrigo Jiménez Gutiérrez
+5556581111
+56-58-11-12-11
+56.58.11.12.11
+56-58-11-12 11
+302-345-9876
+555658
+56-58-11
+56.58.11
+56.78-98
+65 09 87
+76y87r98
+45y78-56
+78.87 65
+78 54-56
++521565811
+58-11-11#246
+55-5632-0417
+55256048p123
+55256048e123
+esto.es.un.mail+gmail@mail.com
+dominio.com
+[LOG ENTRY] [ERROR] The system is unstable
+[LOG ENTRY] [WARN] The system may be down
+[LOG ENTRY] [LOG] Everything is OK
+[LOG ENTRY] [LOG] [user:@beco] Logged in
+[LOG ENTRY] [LOG] [user:@beco] Clicked here
+[LOG ENTRY] [LOG] [user:@beco] Rated the app
+[LOG ENTRY] [LOG] [user:@beco] Logged out
+[LOG ENTRY] [ERROR] The system is unstable
+[LOG ENTRY] [WARN] The system may be down
+[LOG ENTRY] [WARN] Microsoft just bought Github
+[LOG DATA] [LOG] Everything is OK
+[LOG ENTRY] [LOG] [user:@beco] Logged in
+[LOG ENTRY] [LOG] [user:@beco] Clicked here
+[LOG DATA] [LOG] [user:@celismx] Did something
+[LOG ENTRY] [LOG] [user:@beco] Rated the app
+[LOG ENTRY] [LOG] [user:@beco] Logged out
+[LOG LINE] [LOG] [user:@celismx] Logged in
+
+esto.es_un.mail@mail.com
+esto.es_un.mail+complejo@mail.com
+dominio.com
+rodrigo.jimenez@yahoo.com.mx
+ruben@starbucks.com
+esto_no$es_email@dominio.com
+no_se_de_internet3@hotmail.com
+
+\d{2,2}[\-\. ]{5,5}\d{2,2}[\-\. ]?\d{2,2}[\-\. ]?\d{2,2}[\-\. ]?\d{2,2}
+.+?[,\n]{1,1} -> lo mas pequeño
+[^1-5a-c] -> negar con ^
+\D -> todo los carateres menos los numeros
+\W -> Los carateres expecioales
+\S -> Los carateres menos los espacios
+^---$ -> la line cumple
+^\[LOG.*\[LOG\].*$ -> busca la line que tenga LOG
+
+^\+?\d{2,3}[^\da-z]?\d{2,3}[^\da-z]?\d{2,3}[#ep]?\d*$ Formato numero telefonico mexicano
+https?:\/{2,2}[\w\-\.]+\.\w{2,6}\/?\S* -> url
+[\w\._]{5,35}\+?[\w]{0,10}@[\w\.\-]{3,}\.\w{2,5}$ -> email

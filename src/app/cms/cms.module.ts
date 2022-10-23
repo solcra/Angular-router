@@ -8,7 +8,7 @@ import { BasicFormComponent } from './components/basic-form/basic-form.component
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material/material.module';
 import { CategoryFormComponent } from './pages/categories/category-form/category-form.component';
-
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -16,13 +16,14 @@ import { CategoryFormComponent } from './pages/categories/category-form/category
     GridComponent,
     LayoutComponent,
     BasicFormComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
   ],
   imports: [
     CommonModule,
     CmsRoutingModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ]
 })
 export class CmsModule { }
